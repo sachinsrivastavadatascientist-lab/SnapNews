@@ -15,3 +15,4 @@ wikipedia
 arxiv
 faiss-cpu
 tavily-python
+reportlab

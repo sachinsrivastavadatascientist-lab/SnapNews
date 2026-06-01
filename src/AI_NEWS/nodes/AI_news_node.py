@@ -1,5 +1,6 @@
 from tavily import TavilyClient
 from langchain_core.prompts import ChatPromptTemplate
+import os 
 
 class AINewsNode:
     def __init__(self,llm):
@@ -80,16 +81,22 @@ class AINewsNode:
         self.state['summary'] = state['summary']
         return self.state
     
-    def save_result(self,state):
+  
+
+    def save_result(self, state):
         frequency = self.state['frequency']
         summary = self.state['summary']
-        filename = f"./AINews/{frequency}_summary.md"
-        with open(filename,"w") as f:
-            f.write(f' # {frequency.capitalize()} AI News Summary\n\n')
+
+        os.makedirs("AINews", exist_ok=True)
+
+        filename = f"AINews/{frequency}_summary.md"
+
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(f"# {frequency.capitalize()} AI News Summary\n\n")
             f.write(summary)
 
-        self.state['filename'] = filename
+        self.state["filename"] = filename
         return self.state
 
-        
-        
+            
+            
